@@ -1,0 +1,28 @@
+{
+  "name": "sskgo-perfcurve",
+  "version": "1.0.0",
+  "description": "Plot rotating machine operation point on a performance curve canvas.",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "repository": "github:SSKGo/grafana-perfcurve-panel",
+  "author": "SSKGO",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SSKGo/grafana-perfcurve-panel/issues"
+  },
+  "devDependencies": {
+    "@grafana/data": "7.0.1",
+    "@grafana/runtime": "^7.1.5",
+    "@grafana/toolkit": "7.0.1",
+    "@grafana/ui": "7.0.1",
+    "@types/d3": "^5.7.2",
+    "emotion": "10.0.27"
+  },
+  "engines": {
+    "node": ">=12 <13"
+  }
+}
