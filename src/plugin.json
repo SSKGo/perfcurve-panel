@@ -1,7 +1,7 @@
 {
   "type": "panel",
   "name": "PerfCurve",
-  "id": "sskgo-perfcurve",
+  "id": "sskgo-perfcurve-panel",
   "info": {
     "description": "Plot rotating machine operation point on a performance curve.",
     "author": {
