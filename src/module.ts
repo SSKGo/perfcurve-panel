@@ -17,7 +17,6 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
         minValue: 0,
         maxValue: 60,
         label: 'Flowrate',
-        color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
       },
       editor: AxisForms,
     })
@@ -30,7 +29,6 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
         minValue: 0,
         maxValue: 100,
         label: 'Pressure',
-        color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
       },
       editor: AxisForms,
     })
