@@ -210,7 +210,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
                 fill="none"
                 stroke={dataCurve.color}
                 stroke-width="1.5"
-                id={'curve-' + { index }}
+                id={'curve-' + index}
                 ref={node => {
                   d3.select(node)
                     .datum(dataCurve.data)
