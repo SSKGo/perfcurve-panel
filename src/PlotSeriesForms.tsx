@@ -115,6 +115,7 @@ export class PlotSeriesForms extends React.PureComponent<PanelOptionsEditorProps
             icon="plus"
             onClick={() => {
               this.onAdd({
+                label: '',
                 xField: '',
                 yField: '',
                 color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),

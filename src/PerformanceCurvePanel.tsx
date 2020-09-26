@@ -16,24 +16,17 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
   const padding = { top: 20, right: 20, bottom: 70, left: 60 };
 
   type ChartDatum = { x: number; y: number };
-
-  // Read operation data label
-  const xLabel = options.xLabel;
-  const yLabel = options.yLabel;
-
-  // Read max x and max y for scaling
-  const xMax = options.xMax;
-  const yMax = options.yMax;
+  type CurveData = { color: string; data: ChartDatum[] };
 
   // Read performance curve data
   const performanceCurveData: CurvePoints[] = options.performanceCurveData;
-  let dataCurves: ChartDatum[][] = [];
+  let dataCurves: CurveData[] = [];
   for (const [index, performanceCurveDatum] of performanceCurveData.entries()) {
     let curveXArray: string[] = performanceCurveDatum.performCurveX.split(',');
     let curveYArray: string[] = performanceCurveDatum.performCurveY.split(',');
-    dataCurves[index] = [];
+    dataCurves[index] = { color: performanceCurveDatum.color, data: [] };
     for (let i = 0; i < Math.min(curveXArray.length, curveYArray.length); i++) {
-      dataCurves[index][i] = { x: Number(curveXArray[i]), y: Number(curveYArray[i]) };
+      dataCurves[index].data[i] = { x: Number(curveXArray[i]), y: Number(curveYArray[i]) };
     }
   }
 
@@ -98,14 +91,22 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
     }
   }
 
+  // Read X-axis and Y-Axis settings
+  const xLabel = options.xAxis.label;
+  const xMin = options.xAxis.minValue;
+  const xMax = options.xAxis.maxValue;
+  const yLabel = options.yAxis.label;
+  const yMin = options.yAxis.minValue;
+  const yMax = options.yAxis.maxValue;
+
   // Scale
   const xScale = d3
     .scaleLinear()
-    .domain([0, xMax || 0.0])
+    .domain([xMin, xMax || 0.0])
     .range([padding.left, width - padding.right]);
   const yScale = d3
     .scaleLinear()
-    .domain([0, yMax || 0.0])
+    .domain([yMin, yMax || 0.0])
     .range([height - padding.bottom, padding.top]);
   // Create axis
   const xAxis = d3.axisBottom(xScale).ticks(width / 80);
@@ -118,8 +119,6 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
     .x((d: ChartDatum) => xScale(d.x))
     .y((d: ChartDatum) => yScale(d.y));
 
-  // Select performance curve color
-  let curveColor: string = options.curveColor;
   return (
     <div
       className={cx(
@@ -209,12 +208,12 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
             <g id="curve-group">
               <path
                 fill="none"
-                stroke={curveColor}
+                stroke={dataCurve.color}
                 stroke-width="1.5"
                 id={'curve-' + { index }}
                 ref={node => {
                   d3.select(node)
-                    .datum(dataCurve)
+                    .datum(dataCurve.data)
                     .attr('d', curveGenerator);
                 }}
               />

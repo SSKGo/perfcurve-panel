@@ -1,6 +1,7 @@
 export interface CurvePoints {
   performCurveX: string;
   performCurveY: string;
+  color: string;
 }
 export interface PlotSeries {
   label: string;
@@ -9,12 +10,15 @@ export interface PlotSeries {
   color: string;
 }
 
+export interface Axis {
+  minValue: number;
+  maxValue: number;
+  label: string;
+}
+
 export interface CanvasOptions {
-  xLabel: string;
-  yLabel: string;
-  xMax: number;
-  yMax: number;
-  curveColor: string;
+  xAxis: Axis;
+  yAxis: Axis;
   performanceCurveData: CurvePoints[];
   plotSetting: PlotSeries[];
   pointRadius: number;

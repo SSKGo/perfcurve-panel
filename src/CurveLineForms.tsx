@@ -1,6 +1,6 @@
 import React from 'react';
 import { PanelOptionsEditorProps } from '@grafana/data';
-import { Button, Tooltip, Input, HorizontalGroup, Label, VerticalGroup } from '@grafana/ui';
+import { Button, ColorPicker, Tooltip, Input, HorizontalGroup, Label, VerticalGroup } from '@grafana/ui';
 import { CurvePoints } from './types';
 
 interface CurveLineFormProps {
@@ -46,6 +46,16 @@ class CurveLineForm extends React.PureComponent<CurveLineFormProps> {
             onChangeItem && index !== undefined && onChangeItem({ ...value, performCurveY: performCurveY }, index);
           }}
         />
+        <Label>Color</Label>
+        <ColorPicker
+          color={value.color}
+          onChange={color => {
+            this.setState(() => {
+              return { color: color };
+            });
+            onChangeItem && index !== undefined && onChangeItem({ ...value, color: color }, index);
+          }}
+        ></ColorPicker>
         {onDelete && index !== undefined && (
           <Tooltip content="Delete this performance curve." theme={'info'}>
             <Button
