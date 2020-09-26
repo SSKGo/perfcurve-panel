@@ -44,6 +44,7 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
         {
           performCurveX: '10,20,30,40,50',
           performCurveY: '80,78,72,62,48',
+          color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
         },
       ],
       editor: CurveLineForms,
