@@ -21,7 +21,9 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
   const xLabel = options.xLabel;
   const yLabel = options.yLabel;
 
-  // Read max x and max y for scaling
+  // Read min and max of x and y for scaling
+  const xMin = options.xMin;
+  const yMin = options.yMin;
   const xMax = options.xMax;
   const yMax = options.yMax;
 
@@ -101,11 +103,11 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
   // Scale
   const xScale = d3
     .scaleLinear()
-    .domain([0, xMax || 0.0])
+    .domain([xMin, xMax || 0.0])
     .range([padding.left, width - padding.right]);
   const yScale = d3
     .scaleLinear()
-    .domain([0, yMax || 0.0])
+    .domain([yMin, yMax || 0.0])
     .range([height - padding.bottom, padding.top]);
   // Create axis
   const xAxis = d3.axisBottom(xScale).ticks(width / 80);

@@ -12,6 +12,8 @@ export interface PlotSeries {
 export interface CanvasOptions {
   xLabel: string;
   yLabel: string;
+  xMin: number;
+  yMin: number;
   xMax: number;
   yMax: number;
   curveColor: string;

@@ -8,27 +8,39 @@ import { getColorFromHexRgbOrName } from '@grafana/data';
 export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setPanelOptions(builder => {
   return builder
     .addTextInput({
-      category: ['Canvas Setting', 'Axis'],
+      category: ['Canvas Setting', 'X-Axis'],
       path: 'xLabel',
-      name: 'xAxis Label',
+      name: 'X-Axis Label',
       defaultValue: 'Flowrate',
     })
     .addNumberInput({
-      category: ['Canvas Setting', 'Axis'],
+      category: ['Canvas Setting', 'X-Axis'],
+      path: 'xMin',
+      name: 'X-Axis Min Value',
+      defaultValue: 0,
+    })
+    .addNumberInput({
+      category: ['Canvas Setting', 'X-Axis'],
       path: 'xMax',
-      name: 'xAxis Max Value',
+      name: 'X-Axis Max Value',
       defaultValue: 1600,
     })
     .addTextInput({
-      category: ['Canvas Setting', 'Axis'],
+      category: ['Canvas Setting', 'Y-Axis'],
       path: 'yLabel',
-      name: 'yAxis Label',
+      name: 'Y-Axis Label',
       defaultValue: 'Pressure',
     })
     .addNumberInput({
-      category: ['Canvas Setting', 'Axis'],
+      category: ['Canvas Setting', 'Y-Axis'],
+      path: 'yMin',
+      name: 'Y-Axis Min Value',
+      defaultValue: 200,
+    })
+    .addNumberInput({
+      category: ['Canvas Setting', 'Y-Axis'],
       path: 'yMax',
-      name: 'yAxis Max Value',
+      name: 'Y-Axis Max Value',
       defaultValue: 4000,
     })
     .addColorPicker({
