@@ -15,7 +15,7 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       name: 'X-Axis Setting',
       defaultValue: {
         minValue: 0,
-        maxValue: 4000,
+        maxValue: 60,
         label: 'Flowrate',
         color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
       },
@@ -28,7 +28,7 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       name: 'Y-Axis Setting',
       defaultValue: {
         minValue: 0,
-        maxValue: 1600,
+        maxValue: 100,
         label: 'Pressure',
         color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
       },
@@ -42,8 +42,8 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       description: 'Input sample data points of peformance curve . Program automatically draw smooth lines.',
       defaultValue: [
         {
-          performCurveX: '200,400,600,800,1000,1200,1400',
-          performCurveY: '4000,3900,3600,3100,2400,1500,400',
+          performCurveX: '10,20,30,40,50',
+          performCurveY: '80,78,72,62,48',
         },
       ],
       editor: CurveLineForms,
@@ -56,8 +56,9 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       description: 'Set field names of X and Y axis to plot operation points. Set alias in query to set field name.',
       defaultValue: [
         {
-          xSeries: 'Field X',
-          ySeries: 'Field Y',
+          label: 'Label Name',
+          xField: 'Field X',
+          yField: 'Field Y',
           color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
         },
       ],
