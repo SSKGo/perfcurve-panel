@@ -9,13 +9,15 @@ export interface PlotSeries {
   color: string;
 }
 
+export interface Axis {
+  minValue: number;
+  maxValue: number;
+  label: string;
+}
+
 export interface CanvasOptions {
-  xLabel: string;
-  yLabel: string;
-  xMin: number;
-  yMin: number;
-  xMax: number;
-  yMax: number;
+  xAxis: Axis;
+  yAxis: Axis;
   curveColor: string;
   performanceCurveData: CurvePoints[];
   plotSetting: PlotSeries[];

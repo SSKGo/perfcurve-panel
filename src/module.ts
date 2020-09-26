@@ -3,56 +3,36 @@ import { CanvasOptions } from './types';
 import { PerformanceCurvePanel } from './PerformanceCurvePanel';
 import { CurveLineForms } from './CurveLineForms';
 import { PlotSeriesForms } from './PlotSeriesForms';
+import { AxisForms } from './AxisForms';
 import { getColorFromHexRgbOrName } from '@grafana/data';
 
 export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setPanelOptions(builder => {
   return builder
-    .addTextInput({
-      category: ['Canvas Setting', 'X-Axis'],
-      path: 'xLabel',
-      name: 'X-Axis Label',
-      defaultValue: 'Flowrate',
-    })
-    .addNumberInput({
-      category: ['Canvas Setting', 'X-Axis'],
-      path: 'xMin',
-      name: 'X-Axis Min Value',
-      defaultValue: 0,
-    })
-    .addNumberInput({
-      category: ['Canvas Setting', 'X-Axis'],
-      path: 'xMax',
-      name: 'X-Axis Max Value',
-      defaultValue: 1600,
-    })
-    .addTextInput({
-      category: ['Canvas Setting', 'Y-Axis'],
-      path: 'yLabel',
-      name: 'Y-Axis Label',
-      defaultValue: 'Pressure',
-    })
-    .addNumberInput({
-      category: ['Canvas Setting', 'Y-Axis'],
-      path: 'yMin',
-      name: 'Y-Axis Min Value',
-      defaultValue: 200,
-    })
-    .addNumberInput({
-      category: ['Canvas Setting', 'Y-Axis'],
-      path: 'yMax',
-      name: 'Y-Axis Max Value',
-      defaultValue: 4000,
-    })
-    .addColorPicker({
-      category: ['Canvas Setting', 'Performance Curve'],
-      path: 'curveColor',
-      name: 'Performance Curve Color',
-      defaultValue: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
-      settings: {
-        allowUndefined: true,
-        disableNamedColors: true,
-        textWhenUndefined: 'Not defined',
+    .addCustomEditor({
+      category: ['Canvas Setting', 'Axis'],
+      id: 'xAxis',
+      path: 'xAxis',
+      name: 'X-Axis Setting',
+      defaultValue: {
+        minValue: 0,
+        maxValue: 4000,
+        label: 'Flowrate',
+        color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
       },
+      editor: AxisForms,
+    })
+    .addCustomEditor({
+      category: ['Canvas Setting', 'Axis'],
+      id: 'yAxis',
+      path: 'yAxis',
+      name: 'Y-Axis Setting',
+      defaultValue: {
+        minValue: 0,
+        maxValue: 1600,
+        label: 'Pressure',
+        color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
+      },
+      editor: AxisForms,
     })
     .addCustomEditor({
       category: ['Canvas Setting', 'Performance Curve'],

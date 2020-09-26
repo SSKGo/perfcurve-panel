@@ -17,16 +17,6 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
 
   type ChartDatum = { x: number; y: number };
 
-  // Read operation data label
-  const xLabel = options.xLabel;
-  const yLabel = options.yLabel;
-
-  // Read min and max of x and y for scaling
-  const xMin = options.xMin;
-  const yMin = options.yMin;
-  const xMax = options.xMax;
-  const yMax = options.yMax;
-
   // Read performance curve data
   const performanceCurveData: CurvePoints[] = options.performanceCurveData;
   let dataCurves: ChartDatum[][] = [];
@@ -99,6 +89,14 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
       };
     }
   }
+
+  // Read X-axis and Y-Axis settings
+  const xLabel = options.xAxis.label;
+  const xMin = options.xAxis.minValue;
+  const xMax = options.xAxis.maxValue;
+  const yLabel = options.yAxis.label;
+  const yMin = options.yAxis.minValue;
+  const yMax = options.yAxis.maxValue;
 
   // Scale
   const xScale = d3
