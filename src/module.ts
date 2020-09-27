@@ -2,6 +2,7 @@ import { PanelPlugin } from '@grafana/data';
 import { CanvasOptions } from './types';
 import { PerformanceCurvePanel } from './PerformanceCurvePanel';
 import { CurveLineForms } from './CurveLineForms';
+import { DynamicCurveLineForms } from './DynamicCurveLineForms';
 import { PlotSeriesForms } from './PlotSeriesForms';
 import { AxisForms } from './AxisForms';
 import { getColorFromHexRgbOrName } from '@grafana/data';
@@ -36,8 +37,8 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       category: ['Canvas Setting', 'Performance Curve'],
       id: 'performanceCurveData',
       path: 'performanceCurveData',
-      name: 'Performance Curve Data',
-      description: 'Input sample data points of peformance curve . Program automatically draw smooth lines.',
+      name: 'Static Performance Curve Data',
+      description: 'Input sample data points of peformance curve. Program automatically draw smooth lines.',
       defaultValue: [
         {
           performCurveX: '10,20,30,40,50',
@@ -47,6 +48,16 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       ],
       editor: CurveLineForms,
     })
+    .addCustomEditor({
+      category: ['Canvas Setting', 'Performance Curve'],
+      id: 'dynamicPerfCurve',
+      path: 'dynamicPerfCurve',
+      name: 'Dynamic Performance Curve Data',
+      description: 'Set filed names to draw dynamic peformance curve. Program automatically draw smooth lines.',
+      defaultValue: [],
+      editor: DynamicCurveLineForms,
+    })
+
     .addCustomEditor({
       category: ['Plot Setting'],
       id: 'plotSetting',
