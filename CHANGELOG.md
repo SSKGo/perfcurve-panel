@@ -1,9 +1,10 @@
 # Change Log
 
-## v1.0.0 - 2020-09-26
+## v1.0.0 - 2020-09-27
 ### Added
 - Added : Add min. value option for x axis and y axis.
-- Changed : Change the axis opption structure.
+- Added : Add dynamic performance curve.
+- Changed : Change the options structures. (Not compatible with the previous version)
 
 ## v0.1.1 - 2020-09-23
 ### Fixed
