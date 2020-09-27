@@ -3,13 +3,14 @@ import { CanvasOptions } from 'types';
 import { css, cx } from 'emotion';
 import * as d3 from 'd3';
 import { CurvePoints } from './types';
+import { Curves } from './Curves';
 import { PlotCircles } from './PlotCircles';
 import { stylesFactory } from '@grafana/ui';
 import { GraphLegend, LegendDisplayMode, LegendItem } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { Field, FieldType, getFieldDisplayName } from '@grafana/data';
 
-interface Props extends PanelProps<CanvasOptions> {}
+interface Props extends PanelProps<CanvasOptions> { }
 
 export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = getStyles();
@@ -17,8 +18,9 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
 
   type ChartDatum = { x: number; y: number };
   type CurveData = { color: string; data: ChartDatum[] };
+  type DynamicCurveData = { color: string; data: ChartDatum[][] };
 
-  // Read performance curve data
+  // Read static performance curve data
   const performanceCurveData: CurvePoints[] = options.performanceCurveData;
   let dataCurves: CurveData[] = [];
   for (const [index, performanceCurveDatum] of performanceCurveData.entries()) {
@@ -42,11 +44,6 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
       seriesName[i] = '';
     }
   }
-  // Read data and prepare data array for plot
-  let dataPlot: Array<Array<[number, number]>> = [[]];
-  let dataLegend: LegendItem[] = [];
-  const plotSetting = options.plotSetting;
-  const plotSettingLength = plotSetting.length;
 
   // Create merged fields from series
   let mergedFields: Field[] = [];
@@ -69,7 +66,11 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
       });
     }
   });
-
+  // Read data and prepare data array for plotting operation point
+  const plotSetting = options.plotSetting;
+  const plotSettingLength = plotSetting.length;
+  let dataPlot: Array<Array<[number, number]>> = [[]];
+  let dataLegend: LegendItem[] = [];
   for (let i = 0; i < plotSettingLength; i++) {
     let fieldX = mergedFields.find(field => field.name === plotSetting[i].xField);
     let fieldY = mergedFields.find(field => field.name === plotSetting[i].yField);
@@ -88,6 +89,32 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         isVisible: true,
         yAxis: 1,
       };
+    }
+  }
+
+  // Read dynamic performance curve data
+  const dynamicPerfCurve = options.dynamicPerfCurve;
+  let dataDynamicCurves: DynamicCurveData[] = [];
+  for (let i = 0; i < dynamicPerfCurve.length; i++) {
+    let fieldGroup = dynamicPerfCurve[i].fieldGroup;
+    dataDynamicCurves[i] = {
+      color: options.dynamicPerfCurve[i].color,
+      data: [],
+    }
+    // j: x, y set
+    for (let j = 0; j < fieldGroup.length; j++) {
+      let fieldX = mergedFields.find(field => field.name === fieldGroup[j].xField);
+      let fieldY = mergedFields.find(field => field.name === fieldGroup[j].yField);
+      if (fieldX && fieldY) {
+        let xData = fieldX.values.toArray();
+        let yData = fieldY.values.toArray();
+        // data for curve
+        // k: time
+        for (let k = 0; k < xData.length; k++) {
+          if (dataDynamicCurves[i].data[k] === undefined) { dataDynamicCurves[i].data[k] = [] }
+          dataDynamicCurves[i].data[k][j] = { x: xData[k], y: yData[k] };
+        }
+      }
     }
   }
 
@@ -202,10 +229,10 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
             );
           })}
         </g>
-        {/* Curve */}
+        {/* Static Curve */}
         {dataCurves.map((dataCurve, index) => {
           return (
-            <g id="curve-group">
+            <g id="static-curve-group">
               <path
                 fill="none"
                 stroke={dataCurve.color}
@@ -217,6 +244,20 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
                     .attr('d', curveGenerator);
                 }}
               />
+            </g>
+          );
+        })}
+        {dataDynamicCurves.map((dataCurve, index) => {
+          return (
+            <g id="dynamic-curve-group">
+              <Curves
+                fill="none"
+                stroke={dataCurve.color}
+                stroke-width="1.5"
+                index={index}
+                data={dataCurve.data}
+                curveGenerator={curveGenerator}
+              ></Curves>
             </g>
           );
         })}

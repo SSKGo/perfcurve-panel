@@ -30,6 +30,7 @@ export interface CanvasOptions {
   xAxis: Axis;
   yAxis: Axis;
   performanceCurveData: CurvePoints[];
+  dynamicPerfCurve: CurveGroup[];
   plotSetting: PlotSeries[];
   pointRadius: number;
 }
