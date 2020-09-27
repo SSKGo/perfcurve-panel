@@ -18,18 +18,20 @@ export class Curves extends React.PureComponent<CurvesProps> {
     return (
       <g>
         {data.map((dataCurve, index) => {
-          return (<path
-            fill={fill}
-            stroke={stroke}
-            stroke-width={this.props['stroke-width']}
-            id={'curve-' + this.props.index * 100 + index}
-            ref={node => {
-              return d3
-                .select(node)
-                .datum(dataCurve)
-                .attr('d', curveGenerator);
-            }}
-          />);
+          return (
+            <path
+              fill={fill}
+              stroke={stroke}
+              stroke-width={this.props['stroke-width']}
+              id={'curve-' + this.props.index * 100 + index}
+              ref={node => {
+                return d3
+                  .select(node)
+                  .datum(dataCurve)
+                  .attr('d', curveGenerator);
+              }}
+            />
+          );
         })}
       </g>
     );

@@ -10,7 +10,7 @@ import { GraphLegend, LegendDisplayMode, LegendItem } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { Field, FieldType, getFieldDisplayName } from '@grafana/data';
 
-interface Props extends PanelProps<CanvasOptions> { }
+interface Props extends PanelProps<CanvasOptions> {}
 
 export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = getStyles();
@@ -100,7 +100,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
     dataDynamicCurves[i] = {
       color: options.dynamicPerfCurve[i].color,
       data: [],
-    }
+    };
     // j: x, y set
     for (let j = 0; j < fieldGroup.length; j++) {
       let fieldX = mergedFields.find(field => field.name === fieldGroup[j].xField);
@@ -111,7 +111,9 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         // data for curve
         // k: time
         for (let k = 0; k < xData.length; k++) {
-          if (dataDynamicCurves[i].data[k] === undefined) { dataDynamicCurves[i].data[k] = [] }
+          if (dataDynamicCurves[i].data[k] === undefined) {
+            dataDynamicCurves[i].data[k] = [];
+          }
           dataDynamicCurves[i].data[k][j] = { x: xData[k], y: yData[k] };
         }
       }
