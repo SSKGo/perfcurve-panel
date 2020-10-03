@@ -10,7 +10,7 @@ import { GraphLegend, LegendDisplayMode, LegendItem } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { Field, FieldType, getFieldDisplayName, getValueFormat } from '@grafana/data';
 
-interface Props extends PanelProps<CanvasOptions> { }
+interface Props extends PanelProps<CanvasOptions> {}
 
 export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = getStyles();
@@ -128,12 +128,13 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
 
   // Function to add unit to axis label
   const getLabelWithUnit = (label: string, unit: string | undefined) => {
-    if (getValueFormat(unit)(0).suffix) {
-      return (label + ` [${getValueFormat(unit)(0).suffix?.trim()}]`)
+    const unitToIndicate = getValueFormat(unit)(0).suffix;
+    if (unitToIndicate) {
+      return label + ` [${unitToIndicate?.trim()}]`;
     } else {
-      return (label)
+      return label;
     }
-  }
+  };
 
   // Scale
   const xScale = d3

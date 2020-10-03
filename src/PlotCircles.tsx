@@ -33,25 +33,20 @@ export class PlotCircles extends React.PureComponent<PlotCirclesProps> {
               content={() => {
                 return (
                   <HorizontalGroup>
-                    <GraphLegend
-                      items={[legend]}
-                      placement="over"
-                      displayMode={LegendDisplayMode.List}
-                    >
-                    </GraphLegend>
-                    <div>{xAxis.label} {x}, {yAxis.label} {y}</div>
+                    <GraphLegend items={[legend]} placement="over" displayMode={LegendDisplayMode.List}></GraphLegend>
+                    <div>
+                      {xAxis.label} {x}, {yAxis.label} {y}
+                    </div>
                   </HorizontalGroup>
-                )
+                );
               }}
-              theme="info">
-              <circle r={String(radius)} cx={xScale(datum[0])} cy={yScale(datum[1])} fill={legend.color}
-              >
-              </circle>
+              theme="info"
+            >
+              <circle r={String(radius)} cx={xScale(datum[0])} cy={yScale(datum[1])} fill={legend.color}></circle>
             </Tooltip>
           );
-        })
-        }
-      </g >
+        })}
+      </g>
     );
   }
 }
