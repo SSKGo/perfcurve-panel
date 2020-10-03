@@ -24,6 +24,8 @@ export interface Axis {
   minValue: number;
   maxValue: number;
   label: string;
+  unit: string | undefined;
+  decimals: number | undefined;
 }
 
 export interface CanvasOptions {
