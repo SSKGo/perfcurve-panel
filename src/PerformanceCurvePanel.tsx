@@ -8,7 +8,7 @@ import { PlotCircles } from './PlotCircles';
 import { stylesFactory } from '@grafana/ui';
 import { GraphLegend, LegendDisplayMode, LegendItem } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
-import { Field, FieldType, getFieldDisplayName } from '@grafana/data';
+import { Field, FieldType, getFieldDisplayName, getValueFormat } from '@grafana/data';
 
 interface Props extends PanelProps<CanvasOptions> { }
 
@@ -121,12 +121,19 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
   }
 
   // Read X-axis and Y-Axis settings
-  const xLabel = options.xAxis.label;
   const xMin = options.xAxis.minValue;
   const xMax = options.xAxis.maxValue;
-  const yLabel = options.yAxis.label;
   const yMin = options.yAxis.minValue;
   const yMax = options.yAxis.maxValue;
+
+  // Function to add unit to axis label
+  const getLabelWithUnit = (label: string, unit: string | undefined) => {
+    if (getValueFormat(unit)(0).suffix) {
+      return (label + ` [${getValueFormat(unit)(0).suffix?.trim()}]`)
+    } else {
+      return (label)
+    }
+  }
 
   // Scale
   const xScale = d3
@@ -180,7 +187,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
             fill="currentColor"
             font-size="8pt"
           >
-            {xLabel}
+            {getLabelWithUnit(options.xAxis.label, options.xAxis.unit)}
           </text>
         </g>
         {/* yAxis */}
@@ -198,7 +205,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
             transform="rotate(-90)"
             font-size="8pt"
           >
-            {yLabel}
+            {getLabelWithUnit(options.yAxis.label, options.yAxis.unit)}
           </text>
         </g>
         {/* Grid Vertical Lines */}
