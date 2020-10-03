@@ -10,7 +10,7 @@ import { GraphLegend, LegendDisplayMode, LegendItem } from '@grafana/ui';
 import { PanelProps } from '@grafana/data';
 import { Field, FieldType, getFieldDisplayName } from '@grafana/data';
 
-interface Props extends PanelProps<CanvasOptions> {}
+interface Props extends PanelProps<CanvasOptions> { }
 
 export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = getStyles();
@@ -270,6 +270,8 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
               <PlotCircles
                 data={data}
                 radius={pointRadius}
+                xLabel={xLabel}
+                yLabel={yLabel}
                 xScale={xScale}
                 yScale={yScale}
                 color={plotSetting[i].color}
