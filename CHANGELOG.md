@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.1.0 - 2020-10-03
+### Added
+- Added : Add tooltip.
+- Added : Add unit and decimal options to axes.
+
 ## v1.0.0 - 2020-09-27
 ### Added
 - Added : Add min. value option for x axis and y axis.
