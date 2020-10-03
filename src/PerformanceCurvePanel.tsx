@@ -270,11 +270,11 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
               <PlotCircles
                 data={data}
                 radius={pointRadius}
-                xLabel={xLabel}
-                yLabel={yLabel}
+                xAxis={options.xAxis}
+                yAxis={options.yAxis}
                 xScale={xScale}
                 yScale={yScale}
-                color={plotSetting[i].color}
+                legend={dataLegend[i]}
               ></PlotCircles>
             );
           })}

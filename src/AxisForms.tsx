@@ -1,6 +1,6 @@
 import React from 'react';
 import { PanelOptionsEditorProps } from '@grafana/data';
-import { Input, HorizontalGroup, Label, VerticalGroup } from '@grafana/ui';
+import { Input, HorizontalGroup, Label, UnitPicker, VerticalGroup } from '@grafana/ui';
 import { Axis } from './types';
 
 export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>> {
@@ -47,6 +47,30 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
               this.props.onChange({ ...this.props.value, label: label });
               this.setState(() => {
                 return { label: label };
+              });
+            }}
+          />
+        </HorizontalGroup>
+        <HorizontalGroup>
+          <Label>Unit</Label>
+          <UnitPicker
+            onChange={unit => {
+              this.props.onChange({ ...this.props.value, unit: unit });
+              this.setState(() => {
+                return { unit: unit };
+              });
+            }}
+          />
+          <Label>Decimals</Label>
+          <Input
+            type="number"
+            name="decimals"
+            defaultValue={axis.decimals}
+            onChange={e => {
+              const decimals = e.currentTarget.value;
+              this.props.onChange({ ...this.props.value, decimals: Number(decimals) });
+              this.setState(() => {
+                return { decimals: decimals };
               });
             }}
           />

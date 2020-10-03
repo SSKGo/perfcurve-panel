@@ -18,6 +18,7 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
         minValue: 0,
         maxValue: 60,
         label: 'Flowrate',
+        decimals: undefined,
       },
       editor: AxisForms,
     })
