@@ -15,13 +15,11 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
             name="minValue"
             value={axis.minValue}
             onChange={e => {
-              console.log('minValue');
               const minValue = e.currentTarget.value;
-              // this.setState(() => {
-              //   return { minValue: Number(minValue) };
-              // });
+              this.setState(() => {
+                return { minValue: Number(minValue) };
+              });
               this.props.onChange({ ...this.props.value, minValue: Number(minValue) });
-              console.log(this.props.value);
             }}
           />
           <Label>Max</Label>
@@ -31,10 +29,10 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
             defaultValue={axis.maxValue}
             onChange={e => {
               const maxValue = e.currentTarget.value;
+              this.setState(() => {
+                return { maxValue: Number(maxValue) };
+              });
               this.props.onChange({ ...this.props.value, maxValue: Number(maxValue) });
-              // this.setState(() => {
-              //   return { maxValue: Number(maxValue) };
-              // });
             }}
           />
           <Label>Label</Label>
@@ -54,6 +52,7 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
         <HorizontalGroup>
           <Label>Unit</Label>
           <UnitPicker
+            value={axis.unit}
             onChange={unit => {
               this.props.onChange({ ...this.props.value, unit: unit });
               this.setState(() => {
