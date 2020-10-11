@@ -1,3 +1,5 @@
+import { Field } from '@grafana/data';
+
 export interface CurvePoints {
   performCurveX: string;
   performCurveY: string;
@@ -35,4 +37,16 @@ export interface CanvasOptions {
   dynamicPerfCurve: CurveGroup[];
   plotSetting: PlotSeries[];
   pointRadius: number;
+}
+
+export interface MergedFieldsProps {
+  name: string;
+  timeField: Field;
+  valueField: Field;
+}
+
+export interface TimeXYDatumProps {
+  timestamp: number | undefined;
+  x: number | undefined;
+  y: number | undefined;
 }

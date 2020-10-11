@@ -1,16 +1,16 @@
 import React from 'react';
-import { CanvasOptions } from 'types';
 import { css, cx } from 'emotion';
 import * as d3 from 'd3';
-import { CurvePoints } from './types';
-import { Curves } from './Curves';
-import { PlotCircles } from './PlotCircles';
 import { stylesFactory } from '@grafana/ui';
 import { GraphLegend, LegendDisplayMode, LegendItem } from '@grafana/ui';
+import { getValueFormat } from '@grafana/data';
 import { PanelProps } from '@grafana/data';
-import { Field, FieldType, getFieldDisplayName, getValueFormat } from '@grafana/data';
+import { CanvasOptions, CurvePoints, MergedFieldsProps, TimeXYDatumProps } from './types';
+import { Curves } from './Curves';
+import { PlotCircles } from './PlotCircles';
+import { createMergedFields, mergeXYField } from './dataHandler';
 
-interface Props extends PanelProps<CanvasOptions> {}
+interface Props extends PanelProps<CanvasOptions> { }
 
 export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = getStyles();
@@ -45,43 +45,21 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
     }
   }
 
-  // Create merged fields from series
-  let mergedFields: Field[] = [];
-  data.series.map(frame => {
-    if (frame.name !== undefined) {
-      // time_series
-      let valueField = frame.fields.find(field => field.type === FieldType.number);
-      if (valueField) {
-        let valueFieldName = getFieldDisplayName(valueField, frame);
-        valueField.name = valueFieldName;
-        mergedFields.push(valueField);
-      }
-    } else {
-      // table
-      frame.fields.map(field => {
-        if (field.type === FieldType.number) {
-          let valueField = field;
-          mergedFields.push(valueField);
-        }
-      });
-    }
-  });
-  // Read data and prepare data array for plotting operation point
+  // Create time-value merged field array from data
+  // mergedFields is used for plotting operation point and drawing dynamic performance curve
+  let mergedFields: MergedFieldsProps[] = createMergedFields(data);
+
+  // Prepare data array for plotting operation point
   const plotSetting = options.plotSetting;
-  const plotSettingLength = plotSetting.length;
-  let dataPlot: Array<Array<[number, number]>> = [[]];
+  let dataPlot: TimeXYDatumProps[][] = [];
   let dataLegend: LegendItem[] = [];
-  for (let i = 0; i < plotSettingLength; i++) {
-    let fieldX = mergedFields.find(field => field.name === plotSetting[i].xField);
-    let fieldY = mergedFields.find(field => field.name === plotSetting[i].yField);
-    if (fieldX && fieldY) {
-      let xData = fieldX.values.toArray();
-      let yData = fieldY.values.toArray();
-      // data for plot
-      dataPlot[i] = [];
-      for (let j = 0; j < xData.length; j++) {
-        dataPlot[i][j] = [xData[j], yData[j]];
-      }
+  for (let i = 0; i < plotSetting.length; i++) {
+    let fieldPlotX = mergedFields.find(field => field.name === plotSetting[i].xField);
+    let fieldPlotY = mergedFields.find(field => field.name === plotSetting[i].yField);
+    if (fieldPlotX && fieldPlotY) {
+      // Create time-x-y merged array
+      let timeXYData: TimeXYDatumProps[] = mergeXYField(fieldPlotX, fieldPlotY);
+      dataPlot[i] = timeXYData;
       // data for legend
       dataLegend[i] = {
         color: plotSetting[i].color,
@@ -92,7 +70,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
     }
   }
 
-  // Read dynamic performance curve data
+  // Prepare dynamic performance curve data
   const dynamicPerfCurve = options.dynamicPerfCurve;
   let dataDynamicCurves: DynamicCurveData[] = [];
   for (let i = 0; i < dynamicPerfCurve.length; i++) {
@@ -101,20 +79,24 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
       color: options.dynamicPerfCurve[i].color,
       data: [],
     };
-    // j: x, y set
+    // j: point(x, y)
     for (let j = 0; j < fieldGroup.length; j++) {
-      let fieldX = mergedFields.find(field => field.name === fieldGroup[j].xField);
-      let fieldY = mergedFields.find(field => field.name === fieldGroup[j].yField);
-      if (fieldX && fieldY) {
-        let xData = fieldX.values.toArray();
-        let yData = fieldY.values.toArray();
+      let fieldCurveX = mergedFields.find(field => field.name === fieldGroup[j].xField);
+      let fieldCurveY = mergedFields.find(field => field.name === fieldGroup[j].yField);
+      if (fieldCurveX && fieldCurveY) {
+        // Create time-x-y merged array
+        let timeXYData: TimeXYDatumProps[] = mergeXYField(fieldCurveX, fieldCurveY);
         // data for curve
-        // k: time
-        for (let k = 0; k < xData.length; k++) {
+        // i:curve, k: time, j: point(x, y)
+        for (let k = 0; k < timeXYData.length; k++) {
           if (dataDynamicCurves[i].data[k] === undefined) {
             dataDynamicCurves[i].data[k] = [];
           }
-          dataDynamicCurves[i].data[k][j] = { x: xData[k], y: yData[k] };
+          let xPoint = timeXYData[k].x;
+          let yPoint = timeXYData[k].y;
+          if (xPoint && yPoint) {
+            dataDynamicCurves[i].data[k][j] = { x: xPoint, y: yPoint };
+          }
         }
       }
     }
