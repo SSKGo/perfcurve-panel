@@ -18,17 +18,19 @@ interface PlotCirclesProps {
   xScale: (a: number) => number;
   yScale: (a: number) => number;
   legend: LegendProps;
+  timeZone: string;
 }
 
 export class PlotCircles extends React.PureComponent<PlotCirclesProps> {
   render() {
-    const { data, radius, xAxis, yAxis, xScale, yScale, legend } = this.props;
+    const { data, radius, xAxis, yAxis, xScale, yScale, legend, timeZone } = this.props;
     return (
       <g>
         {data.map(datum => {
           if (datum.timestamp && datum.x && datum.y) {
-            // TODO: timeZone to be frexible
-            const timestamp = dateTimeFormatISO(datum.timestamp, { timeZone: undefined });
+            const timestamp = dateTimeFormatISO(datum.timestamp, { timeZone: timeZone })
+              .replace('T', ' ')
+              .replace('+', ' +');
             const x = formattedValueToString(getValueFormat(xAxis.unit)(datum.x, xAxis.decimals));
             const y = formattedValueToString(getValueFormat(yAxis.unit)(datum.y, yAxis.decimals));
             return (

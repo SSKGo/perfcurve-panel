@@ -10,9 +10,9 @@ import { Curves } from './Curves';
 import { PlotCircles } from './PlotCircles';
 import { createMergedFields, mergeXYField } from './dataHandler';
 
-interface Props extends PanelProps<CanvasOptions> { }
+interface Props extends PanelProps<CanvasOptions> {}
 
-export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, height }) => {
+export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, height, timeZone }) => {
   const styles = getStyles();
   const padding = { top: 20, right: 20, bottom: 70, left: 60 };
 
@@ -265,6 +265,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
                 xScale={xScale}
                 yScale={yScale}
                 legend={dataLegend[i]}
+                timeZone={timeZone}
               ></PlotCircles>
             );
           })}
