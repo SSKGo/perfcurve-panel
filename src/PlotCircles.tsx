@@ -1,6 +1,6 @@
 import React from 'react';
-import { Tooltip, GraphLegend, LegendDisplayMode, HorizontalGroup } from '@grafana/ui';
-import { formattedValueToString, getValueFormat } from '@grafana/data';
+import { Tooltip, GraphLegend, LegendDisplayMode, VerticalGroup } from '@grafana/ui';
+import { formattedValueToString, getValueFormat, dateTimeFormatISO } from '@grafana/data';
 import { Axis, TimeXYDatumProps } from './types';
 
 interface LegendProps {
@@ -27,18 +27,24 @@ export class PlotCircles extends React.PureComponent<PlotCirclesProps> {
       <g>
         {data.map(datum => {
           if (datum.timestamp && datum.x && datum.y) {
+            // TODO: timeZone to be frexible
+            const timestamp = dateTimeFormatISO(datum.timestamp, { timeZone: undefined });
             const x = formattedValueToString(getValueFormat(xAxis.unit)(datum.x, xAxis.decimals));
             const y = formattedValueToString(getValueFormat(yAxis.unit)(datum.y, yAxis.decimals));
             return (
               <Tooltip
                 content={() => {
                   return (
-                    <HorizontalGroup>
+                    <VerticalGroup>
                       <GraphLegend items={[legend]} placement="over" displayMode={LegendDisplayMode.List}></GraphLegend>
+                      <div>Time: {timestamp}</div>
                       <div>
-                        {xAxis.label} {x}, {yAxis.label} {y}
+                        {xAxis.label}: {x}
                       </div>
-                    </HorizontalGroup>
+                      <div>
+                        {yAxis.label}: {y}
+                      </div>
+                    </VerticalGroup>
                   );
                 }}
                 theme="info"
