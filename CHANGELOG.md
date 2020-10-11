@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.2.0 - 2020-10-11
+### Added
+- Added : Show time stamp in tooltip.
+
 ## v1.1.0 - 2020-10-03
 ### Added
 - Added : Add tooltip.
