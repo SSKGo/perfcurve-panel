@@ -8,11 +8,11 @@
     "dev": "grafana-toolkit plugin:dev",
     "watch": "grafana-toolkit plugin:dev --watch"
   },
-  "repository": "github:SSKGo/grafana-perfcurve-panel",
+  "repository": "github:SSKGo/perfcurve-panel",
   "author": "SSKGo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SSKGo/grafana-perfcurve-panel/issues"
+    "url": "https://github.com/SSKGo/perfcurve-panel/issues"
   },
   "devDependencies": {
     "@grafana/data": "7.0.1",
