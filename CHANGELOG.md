@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.2.2 - 2020-10-17
+### Added
+- Add screenshots.
+
 ## v1.2.1 - 2020-10-16
 ### Added
 - Add how to use instruction in README.md.
