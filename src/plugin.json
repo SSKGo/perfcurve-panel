@@ -13,7 +13,8 @@
       "factory",
       "pump",
       "compressor",
-      "performance"
+      "performance",
+      "curve"
     ],
     "logos": {
       "small": "img/logo.svg",
@@ -30,7 +31,8 @@
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaVersion": "7.0.x",
+    "grafanaDependency": ">=7.0.0",
+    "grafanaVersion": "7.x.x",
     "plugins": []
   }
 }
