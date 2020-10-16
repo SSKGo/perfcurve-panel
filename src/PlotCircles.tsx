@@ -27,7 +27,7 @@ export class PlotCircles extends React.PureComponent<PlotCirclesProps> {
     return (
       <g>
         {data.map(datum => {
-          if (datum.timestamp && datum.x && datum.y) {
+          if (datum.timestamp !== null && datum.x !== null && datum.y !== null) {
             const timestamp = dateTimeFormatISO(datum.timestamp, { timeZone: timeZone })
               .replace('T', ' ')
               .replace('+', ' +');

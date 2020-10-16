@@ -46,7 +46,7 @@ export interface MergedFieldsProps {
 }
 
 export interface TimeXYDatumProps {
-  timestamp: number | undefined;
-  x: number | undefined;
-  y: number | undefined;
+  timestamp: number | null;
+  x: number | null;
+  y: number | null;
 }
