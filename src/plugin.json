@@ -26,7 +26,12 @@
         "url": "https://github.com/SSKGo/perfcurve-panel"
       }
     ],
-    "screenshots": [],
+    "screenshots": [
+      {
+        "name": "Examples",
+        "path": "img/panel_example.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
