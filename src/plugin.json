@@ -13,7 +13,8 @@
       "factory",
       "pump",
       "compressor",
-      "performance"
+      "performance",
+      "curve"
     ],
     "logos": {
       "small": "img/logo.svg",
