@@ -1,0 +1,43 @@
+{
+  "type": "panel",
+  "name": "PerfCurve",
+  "id": "sskgo-perfcurve-panel",
+  "info": {
+    "description": "Plot rotating machine operation point on a performance curve.",
+    "author": {
+      "name": "SSKGO",
+      "url": "https://github.com/SSKGo"
+    },
+    "keywords": [
+      "plant",
+      "factory",
+      "pump",
+      "compressor",
+      "performance",
+      "curve"
+    ],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/SSKGo/perfcurve-panel"
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "Examples",
+        "path": "img/panel_example.png"
+      }
+    ],
+    "version": "1.2.2",
+    "updated": "2020-10-16"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "grafanaVersion": "7.x.x",
+    "plugins": []
+  }
+}
