@@ -5,7 +5,7 @@ You can draw multiple performance curves on the canvas only by giving sample poi
 
 ![Panel Example](https://github.com/SSKGo/grafana-perfcurve-panel/blob/master/docs/img/panel_example.png "Panel Example")
 
-## How to use PerfCurve?
+## Getting started
 ### Axes setting
 Specify Min., Max., Label, Unit and Decimals of X-Axis amd Y-Axis.
 
@@ -31,22 +31,3 @@ In case performance curve data is availble in database, they can be used to draw
 
 ![Dynamic Curve Setting](https://github.com/SSKGo/grafana-perfcurve-panel/blob/master/docs/img/dynamic_curve_setting.png "Dynamic Curve Setting")
 ![Query for Dynamic Curve](https://github.com/SSKGo/grafana-perfcurve-panel/blob/master/docs/img/query_dynamic_curve.png "Query for Dynamic Curve")
-
-
-## Getting started
-1. Install dependencies
-```BASH
-yarn install
-```
-2. Build plugin in development mode or run in watch mode
-```BASH
-yarn dev
-```
-or
-```BASH
-yarn watch
-```
-3. Build plugin in production mode
-```BASH
-yarn build
-```
