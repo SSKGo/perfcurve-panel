@@ -1,6 +1,6 @@
 {
   "name": "sskgo-perfcurve-panel",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Plot rotating machine operation point on a performance curve canvas.",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
