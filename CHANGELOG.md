@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.3.0 - 2020-11-25
+### Added
+- Add MANIFEST file in dist directory to ensure that the distributed file is community level plugin.
+
 ## v1.2.2 - 2020-10-17
 ### Added
 - Add screenshots.
