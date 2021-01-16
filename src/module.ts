@@ -10,10 +10,10 @@ import { getColorFromHexRgbOrName } from '@grafana/data';
 export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setPanelOptions(builder => {
   return builder
     .addCustomEditor({
-      category: ['Canvas Setting', 'Axis'],
+      category: ['Axes'],
       id: 'xAxis',
       path: 'xAxis',
-      name: 'X-Axis Setting',
+      name: 'X-axis',
       defaultValue: {
         minValue: 0,
         maxValue: 60,
@@ -24,10 +24,10 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       editor: AxisForms,
     })
     .addCustomEditor({
-      category: ['Canvas Setting', 'Axis'],
+      category: ['Axes'],
       id: 'yAxis',
       path: 'yAxis',
-      name: 'Y-Axis Setting',
+      name: 'Y-axis',
       defaultValue: {
         minValue: 0,
         maxValue: 100,
@@ -38,10 +38,10 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       editor: AxisForms,
     })
     .addCustomEditor({
-      category: ['Canvas Setting', 'Performance Curve'],
+      category: ['Performance curve'],
       id: 'performanceCurveData',
       path: 'performanceCurveData',
-      name: 'Static Performance Curve Data',
+      name: 'Static performance curve',
       description: 'Input sample data points of peformance curve. Program automatically draw smooth lines.',
       defaultValue: [
         {
@@ -53,20 +53,20 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       editor: CurveLineForms,
     })
     .addCustomEditor({
-      category: ['Canvas Setting', 'Performance Curve'],
+      category: ['Performance curve'],
       id: 'dynamicPerfCurve',
       path: 'dynamicPerfCurve',
-      name: 'Dynamic Performance Curve Data',
+      name: 'Dynamic performance curve',
       description: 'Set filed names to draw dynamic peformance curve. Program automatically draw smooth lines.',
       defaultValue: [],
       editor: DynamicCurveLineForms,
     })
 
     .addCustomEditor({
-      category: ['Plot Setting'],
+      category: ['Operation points'],
       id: 'plotSetting',
       path: 'plotSetting',
-      name: 'Plot Setting',
+      name: 'Operation points',
       description: 'Set field names of X and Y axis to plot operation points. Set alias in query to set field name.',
       defaultValue: [
         {
@@ -79,9 +79,9 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
       editor: PlotSeriesForms,
     })
     .addSelect({
-      category: ['Plot Setting'],
+      category: ['Operation points'],
       path: 'pointRadius',
-      name: 'Point Radius',
+      name: 'Point radius',
       defaultValue: 2,
       settings: {
         options: [
