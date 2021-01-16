@@ -1,0 +1,35 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "manifestVersion": "2.0.0",
+  "signatureType": "community",
+  "signedByOrg": "sskgo",
+  "signedByOrgName": "sskgo",
+  "plugin": "sskgo-perfcurve-panel",
+  "version": "1.3.1",
+  "time": 1610770156746,
+  "keyId": "7e4d0c6a708866e7",
+  "files": {
+    "img/logo.svg": "25a29247e8cfcf33d697cb98c785953810e8f8d620545fa9ca574066d9e8810e",
+    "img/panel_example.png": "8cfb1c67668584198c7fcc4d2e13ca5b37b9b2d0f0d789bee033749baf6f9395",
+    "index.html": "2fa2c4168c5bb7b8502989f437e4a1a71e663702b0ec9c01530215c8c026dcaf",
+    "LICENSE": "90c3e8bad86fec2d669ef72a96e1a4a90a5e0fb6ae2c78dd677447e37f953dac",
+    "module.js": "d1a8495dc825c43575422b43e6252b6d5bb69efe63c1528eb79c2cd03d76e628",
+    "module.js.LICENSE.txt": "0d8f66cd4afb566cb5b7e1540c68f43b939d3eba12ace290f18abc4f4cb53ed0",
+    "module.js.map": "be4a01c4f5b074b97fde81045f4b3474d48a2d463af31bd1a9f48daf779d4bbb",
+    "plugin.json": "e67a16de300cddfe16b3c334091970b57e79319b885c5967714fdd9a09fd198f",
+    "README.md": "fb0d2161e6f862565bedba53ce601f57b6c68fc1f97133b0492288b1a30cbaa3"
+  }
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.1
+Comment: https://openpgpjs.org
+
+wqEEARMKAAYFAmACZu0ACgkQfk0ManCIZufZ+QII05OiVsmpFZ/gWMWRhR9L
++uOezRjZ0uceGE1nwO2tNXOS+eLMRtfGUPjBmQiGeadGzWYMU5KsiJHTXN6E
+1MfGZCwCCQETpUVLVs3IABplEi9BCPURVSyo/KaKgj5xXLiVouwX3cLi9AZb
+Xbru1VEpMqVJt8Nq7MAcXnT531h+8p/opWtuEw==
+=kKLn
+-----END PGP SIGNATURE-----
