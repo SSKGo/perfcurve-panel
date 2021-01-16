@@ -66,8 +66,7 @@ class CurveLineForm extends React.PureComponent<CurveLineFormProps> {
               onClick={() => {
                 onDelete(index);
               }}
-            >
-            </Button>
+            ></Button>
           </Tooltip>
         )}
       </HorizontalGroup>
@@ -118,7 +117,7 @@ export class CurveLineForms extends React.PureComponent<PanelOptionsEditorProps<
               index={index}
               onChangeItem={this.onChangeItem}
               onDelete={this.onDelete}
-            // styles={styles}
+              // styles={styles}
             />
           );
         })}

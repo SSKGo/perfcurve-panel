@@ -79,8 +79,7 @@ class PlotSeriesForm extends React.PureComponent<PlotSeriesrops> {
               onClick={() => {
                 onDelete(index);
               }}
-            >
-            </Button>
+            ></Button>
           </Tooltip>
         )}
       </HorizontalGroup>

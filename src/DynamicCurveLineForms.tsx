@@ -1,7 +1,16 @@
 import React from 'react';
 import { getColorFromHexRgbOrName } from '@grafana/data';
 import { PanelOptionsEditorProps } from '@grafana/data';
-import { Button, ControlledCollapse, ColorPicker, HorizontalGroup, Input, Label, Tooltip, VerticalGroup } from '@grafana/ui';
+import {
+  Button,
+  ControlledCollapse,
+  ColorPicker,
+  HorizontalGroup,
+  Input,
+  Label,
+  Tooltip,
+  VerticalGroup,
+} from '@grafana/ui';
 import { CurveGroup, CurveItem } from './types';
 
 interface CurveItemFormProps {
@@ -54,8 +63,7 @@ class CurveItemForm extends React.PureComponent<CurveItemFormProps> {
             onClick={() => {
               onDeleteItem(index);
             }}
-          >
-          </Button>
+          ></Button>
         </Tooltip>
       </HorizontalGroup>
     );
@@ -103,8 +111,7 @@ class CurveGroupForm extends React.PureComponent<CurveGroupFormProps> {
                 onClick={() => {
                   onDelete(index);
                 }}
-              >
-              </Button>
+              ></Button>
             </Tooltip>
           </HorizontalGroup>
           <HorizontalGroup>
