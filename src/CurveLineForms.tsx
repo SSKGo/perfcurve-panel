@@ -58,7 +58,7 @@ class CurveLineForm extends React.PureComponent<CurveLineFormProps> {
           }}
         ></ColorPicker>
         {onDelete && index !== undefined && (
-          <Tooltip content="Delete this performance curve." theme={'info'}>
+          <Tooltip content="Remove this performance curve." theme={'info'}>
             <Button
               variant="destructive"
               icon="trash-alt"
@@ -67,7 +67,6 @@ class CurveLineForm extends React.PureComponent<CurveLineFormProps> {
                 onDelete(index);
               }}
             >
-              Remove
             </Button>
           </Tooltip>
         )}
@@ -119,7 +118,7 @@ export class CurveLineForms extends React.PureComponent<PanelOptionsEditorProps<
               index={index}
               onChangeItem={this.onChangeItem}
               onDelete={this.onDelete}
-              // styles={styles}
+            // styles={styles}
             />
           );
         })}
