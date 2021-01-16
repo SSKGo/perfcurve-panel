@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.3.1 - 2021-01-16
+### Changed
+- Change the options structures and appearance. (Compatible with the previous version)
+
 ## v1.3.0 - 2020-11-25
 ### Added
 - Add MANIFEST file in dist directory to ensure that the distributed file is community level plugin.
