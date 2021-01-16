@@ -1,7 +1,16 @@
 import React from 'react';
 import { getColorFromHexRgbOrName } from '@grafana/data';
 import { PanelOptionsEditorProps } from '@grafana/data';
-import { Button, ControlledCollapse, ColorPicker, HorizontalGroup, Input, Label, VerticalGroup } from '@grafana/ui';
+import {
+  Button,
+  ControlledCollapse,
+  ColorPicker,
+  HorizontalGroup,
+  Input,
+  Label,
+  Tooltip,
+  VerticalGroup,
+} from '@grafana/ui';
 import { CurveGroup, CurveItem } from './types';
 
 interface CurveItemFormProps {
@@ -46,16 +55,16 @@ class CurveItemForm extends React.PureComponent<CurveItemFormProps> {
             onChangeItem({ ...value, yField: yField }, index);
           }}
         />
-        <Button
-          variant="destructive"
-          icon="trash-alt"
-          size="sm"
-          onClick={() => {
-            onDeleteItem(index);
-          }}
-        >
-          Remove
-        </Button>
+        <Tooltip content="Remove this point." theme={'info'}>
+          <Button
+            variant="destructive"
+            icon="trash-alt"
+            size="sm"
+            onClick={() => {
+              onDeleteItem(index);
+            }}
+          ></Button>
+        </Tooltip>
       </HorizontalGroup>
     );
   }
@@ -91,19 +100,19 @@ class CurveGroupForm extends React.PureComponent<CurveGroupFormProps> {
   render() {
     const { value, index, onChange, onDelete } = this.props;
     return (
-      <ControlledCollapse collapsible label={`Line Group ${index}`}>
+      <ControlledCollapse collapsible label={`Line group ${index}`}>
         <VerticalGroup>
           <HorizontalGroup>
-            <Button
-              variant="destructive"
-              icon="trash-alt"
-              size="sm"
-              onClick={() => {
-                onDelete(index);
-              }}
-            >
-              Remove Line Group
-            </Button>
+            <Tooltip content="Remove this line group." theme={'info'}>
+              <Button
+                variant="destructive"
+                icon="trash-alt"
+                size="sm"
+                onClick={() => {
+                  onDelete(index);
+                }}
+              ></Button>
+            </Tooltip>
           </HorizontalGroup>
           <HorizontalGroup>
             <Button

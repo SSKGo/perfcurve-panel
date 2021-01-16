@@ -71,7 +71,7 @@ class PlotSeriesForm extends React.PureComponent<PlotSeriesrops> {
           }}
         ></ColorPicker>
         {onDelete && index !== undefined && (
-          <Tooltip content="Delete this plot." theme={'info'}>
+          <Tooltip content="Remove this operation points." theme={'info'}>
             <Button
               variant="destructive"
               icon="trash-alt"
@@ -79,9 +79,7 @@ class PlotSeriesForm extends React.PureComponent<PlotSeriesrops> {
               onClick={() => {
                 onDelete(index);
               }}
-            >
-              Remove
-            </Button>
+            ></Button>
           </Tooltip>
         )}
       </HorizontalGroup>
