@@ -36,18 +36,18 @@ export const mergeXYField = (fieldPlotX: MergedFieldsProps, fieldPlotY: MergedFi
 export const createMergedFields = (data: PanelData): MergedFieldsProps[] => {
   // Create merged fields from series
   let mergedFields: MergedFieldsProps[] = [];
-  data.series.map(frame => {
-    let timeField = frame.fields.find(field => field.type === FieldType.time);
+  data.series.map((frame) => {
+    let timeField = frame.fields.find((field) => field.type === FieldType.time);
     if (frame.name !== undefined) {
       // time_series
-      let valueField = frame.fields.find(field => field.type === FieldType.number);
+      let valueField = frame.fields.find((field) => field.type === FieldType.number);
       if (valueField && timeField) {
         valueField.name = getFieldDisplayName(valueField, frame);
         mergedFields.push({ name: valueField.name, timeField: timeField, valueField: valueField });
       }
     } else {
       // table
-      frame.fields.map(field => {
+      frame.fields.map((field) => {
         if (field.type === FieldType.number && timeField) {
           let valueField = field;
           mergedFields.push({ name: valueField.name, timeField: timeField, valueField: valueField });

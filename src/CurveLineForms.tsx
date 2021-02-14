@@ -23,10 +23,11 @@ class CurveLineForm extends React.PureComponent<CurveLineFormProps> {
       <HorizontalGroup>
         <Label>X</Label>
         <Input
+          css=""
           type="text"
           name="performCurveX"
           defaultValue={value.performCurveX}
-          onBlur={e => {
+          onBlur={(e) => {
             const performCurveX = e.currentTarget.value;
             this.setState(() => {
               return { performCurveX: performCurveX };
@@ -36,10 +37,11 @@ class CurveLineForm extends React.PureComponent<CurveLineFormProps> {
         />
         <Label>Y</Label>
         <Input
+          css=""
           type="text"
           name="performCurveY"
           defaultValue={value.performCurveY}
-          onBlur={e => {
+          onBlur={(e) => {
             const performCurveY = e.currentTarget.value;
             this.setState(() => {
               return { performCurveY: performCurveY };
@@ -50,7 +52,7 @@ class CurveLineForm extends React.PureComponent<CurveLineFormProps> {
         <Label>Color</Label>
         <ColorPicker
           color={value.color}
-          onChange={color => {
+          onChange={(color) => {
             this.setState(() => {
               return { color: color };
             });

@@ -23,10 +23,11 @@ class PlotSeriesForm extends React.PureComponent<PlotSeriesrops> {
       <HorizontalGroup>
         <Label>Label</Label>
         <Input
+          css=""
           type="text"
           name="label"
           defaultValue={value.label}
-          onBlur={e => {
+          onBlur={(e) => {
             const label = e.currentTarget.value;
             this.setState(() => {
               return { label: label };
@@ -36,10 +37,11 @@ class PlotSeriesForm extends React.PureComponent<PlotSeriesrops> {
         />
         <Label>X</Label>
         <Input
+          css=""
           type="text"
           name="xField"
           defaultValue={value.xField}
-          onBlur={e => {
+          onBlur={(e) => {
             const xField = e.currentTarget.value;
             this.setState(() => {
               return { xField: xField };
@@ -49,10 +51,11 @@ class PlotSeriesForm extends React.PureComponent<PlotSeriesrops> {
         />
         <Label>Y</Label>
         <Input
+          css=""
           type="text"
           name="yField"
           defaultValue={value.yField}
-          onBlur={e => {
+          onBlur={(e) => {
             const yField = e.currentTarget.value;
             this.setState(() => {
               return { yField: yField };
@@ -63,7 +66,7 @@ class PlotSeriesForm extends React.PureComponent<PlotSeriesrops> {
         <Label>Color</Label>
         <ColorPicker
           color={value.color}
-          onChange={color => {
+          onChange={(color) => {
             this.setState(() => {
               return { color: color };
             });

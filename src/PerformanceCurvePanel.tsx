@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import * as d3 from 'd3';
 import { stylesFactory } from '@grafana/ui';
-import { GraphLegend, LegendDisplayMode, LegendItem } from '@grafana/ui';
+import { VizLegend, LegendDisplayMode, VizLegendItem } from '@grafana/ui';
 import { getValueFormat } from '@grafana/data';
 import { PanelProps } from '@grafana/data';
 import { CanvasOptions, CurvePoints, MergedFieldsProps, TimeXYDatumProps } from './types';
@@ -52,10 +52,10 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
   // Prepare data array for plotting operation point
   const plotSetting = options.plotSetting;
   let dataPlot: TimeXYDatumProps[][] = [];
-  let dataLegend: LegendItem[] = [];
+  let dataLegend: VizLegendItem[] = [];
   for (let i = 0; i < plotSetting.length; i++) {
-    let fieldPlotX = mergedFields.find(field => field.name === plotSetting[i].xField);
-    let fieldPlotY = mergedFields.find(field => field.name === plotSetting[i].yField);
+    let fieldPlotX = mergedFields.find((field) => field.name === plotSetting[i].xField);
+    let fieldPlotY = mergedFields.find((field) => field.name === plotSetting[i].yField);
     if (fieldPlotX && fieldPlotY) {
       // Create time-x-y merged array
       let timeXYData: TimeXYDatumProps[] = mergeXYField(fieldPlotX, fieldPlotY);
@@ -64,7 +64,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
       dataLegend[i] = {
         color: plotSetting[i].color,
         label: plotSetting[i].label,
-        isVisible: true,
+        disabled: false,
         yAxis: 1,
       };
     }
@@ -81,8 +81,8 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
     };
     // j: point(x, y)
     for (let j = 0; j < fieldGroup.length; j++) {
-      let fieldCurveX = mergedFields.find(field => field.name === fieldGroup[j].xField);
-      let fieldCurveY = mergedFields.find(field => field.name === fieldGroup[j].yField);
+      let fieldCurveX = mergedFields.find((field) => field.name === fieldGroup[j].xField);
+      let fieldCurveY = mergedFields.find((field) => field.name === fieldGroup[j].yField);
       if (fieldCurveX && fieldCurveY) {
         // Create time-x-y merged array
         let timeXYData: TimeXYDatumProps[] = mergeXYField(fieldCurveX, fieldCurveY);
@@ -135,9 +135,22 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
   const curveGenerator = d3
     .line<ChartDatum>()
     .curve(d3.curveBasis)
-    .x((d: ChartDatum) => xScale(d.x))
-    .y((d: ChartDatum) => yScale(d.y));
-
+    .x((d: ChartDatum) => {
+      // To avoid type annotation error, if undefined then 0.0
+      let x = xScale(d.x);
+      if (typeof x === 'undefined') {
+        x = 0.0;
+      }
+      return x;
+    })
+    .y((d: ChartDatum) => {
+      // To avoid type annotation error, if undefined then 0.0
+      let y = yScale(d.y);
+      if (typeof y === 'undefined') {
+        y = 0.0;
+      }
+      return y;
+    });
   return (
     <div
       className={cx(
@@ -159,16 +172,16 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         {/* xAxis */}
         <g
           transform={`translate(0, ${height - padding.bottom})`}
-          ref={node => {
+          ref={(node) => {
             d3.select(node).call(xAxis as any);
           }}
         >
           <text
             x={(width - padding.left - padding.right) / 2 + padding.left}
             y="40"
-            text-anchor="middle"
+            textAnchor="middle"
             fill="currentColor"
-            font-size="8pt"
+            fontSize="8pt"
           >
             {getLabelWithUnit(options.xAxis.label, options.xAxis.unit)}
           </text>
@@ -176,17 +189,17 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         {/* yAxis */}
         <g
           transform={`translate(${padding.left}, 0)`}
-          ref={node => {
+          ref={(node) => {
             d3.select(node).call(yAxis as any);
           }}
         >
           <text
             x={-(height - padding.top - padding.bottom) / 2}
             y="-50"
-            text-anchor="middle"
+            textAnchor="middle"
             fill="currentColor"
             transform="rotate(-90)"
-            font-size="8pt"
+            fontSize="8pt"
           >
             {getLabelWithUnit(options.yAxis.label, options.yAxis.unit)}
           </text>
@@ -194,14 +207,17 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         {/* Grid Vertical Lines */}
         <g>
           {xScale.ticks().map((d: number) => {
+            let x = xScale(d);
+            x = typeof x === 'undefined' ? undefined : 0.5 + x;
             return (
               <line
                 stroke="currentColor"
-                stroke-opacity="0.1"
+                strokeOpacity="0.1"
                 y1={padding.top}
                 y2={height - padding.bottom}
-                x1={0.5 + xScale(d)}
-                x2={0.5 + xScale(d)}
+                x1={x}
+                x2={x}
+                key={'x_' + x?.toString()}
               ></line>
             );
           })}
@@ -209,14 +225,17 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         {/* Grid Horizontal Lines */}
         <g>
           {yScale.ticks().map((d: number) => {
+            let y = yScale(d);
+            y = typeof y === 'undefined' ? undefined : 0.5 + y;
             return (
               <line
                 stroke="currentColor"
-                stroke-opacity="0.1"
+                strokeOpacity="0.1"
                 x1={padding.left}
                 x2={width - padding.right}
-                y1={0.5 + yScale(d)}
-                y2={0.5 + yScale(d)}
+                y1={y}
+                y2={y}
+                key={'y_' + y?.toString()}
               ></line>
             );
           })}
@@ -224,16 +243,14 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         {/* Static Curve */}
         {dataCurves.map((dataCurve, index) => {
           return (
-            <g id="static-curve-group">
+            <g id="static-curve-group" key={'dataCurve' + index.toString()}>
               <path
                 fill="none"
                 stroke={dataCurve.color}
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 id={'curve-' + index}
-                ref={node => {
-                  d3.select(node)
-                    .datum(dataCurve.data)
-                    .attr('d', curveGenerator);
+                ref={(node) => {
+                  d3.select(node).datum(dataCurve.data).attr('d', curveGenerator);
                 }}
               />
             </g>
@@ -241,7 +258,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
         })}
         {dataDynamicCurves.map((dataCurve, index) => {
           return (
-            <g id="dynamic-curve-group">
+            <g id="dynamic-curve-group" key={'dynamicCurve' + index.toString()}>
               <Curves
                 fill="none"
                 stroke={dataCurve.color}
@@ -266,13 +283,14 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
                 yScale={yScale}
                 legend={dataLegend[i]}
                 timeZone={timeZone}
+                key={'plot' + i.toString()}
               ></PlotCircles>
             );
           })}
         </g>
       </svg>
       <div className={styles.legend}>
-        <GraphLegend items={dataLegend} displayMode={LegendDisplayMode.List} placement="under"></GraphLegend>
+        <VizLegend items={dataLegend} displayMode={LegendDisplayMode.List} placement="bottom" />
       </div>
     </div>
   );
