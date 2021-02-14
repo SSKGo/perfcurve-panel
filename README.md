@@ -6,6 +6,11 @@ You can draw multiple performance curves on the canvas only by giving sample poi
 
 ![Panel Example](https://raw.githubusercontent.com/SSKGo/perfcurve-panel/master/docs/img/panel_example.png "Panel Example")
 
+## Important notes !!
+Select the plugin version in accordance with the following rule.
+- For Grafana \<= 7.3.X, use version \<= 1.3.X
+- For Grafana \>= 7.4.X, use version \>= 1.4.X
+
 ## Getting started
 ### Axes
 Specify Min., Max., Label, Unit and Decimals of X-axis amd Y-axis.
