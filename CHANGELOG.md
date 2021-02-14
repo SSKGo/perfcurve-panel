@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.4.0 - 2021-02-14
+### Fixed
+- Fix the bug which happens when the plugin is used in Grafana 7.4.x.
+### Changed
+- Change devDependencies of "@grafana/data", "@grafana/toolkit" and "@grafana/ui".
+
 ## v1.3.1 - 2021-01-16
 ### Changed
 - Change the options structures and appearance. (Compatible with the previous version)
