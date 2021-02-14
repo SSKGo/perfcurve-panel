@@ -11,10 +11,11 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
         <HorizontalGroup>
           <Label>Min</Label>
           <Input
+            css=""
             type="number"
             name="minValue"
             value={axis.minValue}
-            onChange={e => {
+            onChange={(e) => {
               const minValue = e.currentTarget.value;
               this.setState(() => {
                 return { minValue: Number(minValue) };
@@ -24,10 +25,11 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
           />
           <Label>Max</Label>
           <Input
+            css=""
             type="number"
             name="maxValue"
             defaultValue={axis.maxValue}
-            onChange={e => {
+            onChange={(e) => {
               const maxValue = e.currentTarget.value;
               this.setState(() => {
                 return { maxValue: Number(maxValue) };
@@ -37,10 +39,11 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
           />
           <Label>Label</Label>
           <Input
+            css=""
             type="text"
             name="label"
             defaultValue={axis.label}
-            onChange={e => {
+            onChange={(e) => {
               const label = e.currentTarget.value;
               this.props.onChange({ ...this.props.value, label: label });
               this.setState(() => {
@@ -53,7 +56,7 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
           <Label>Unit</Label>
           <UnitPicker
             value={axis.unit}
-            onChange={unit => {
+            onChange={(unit) => {
               this.props.onChange({ ...this.props.value, unit: unit });
               this.setState(() => {
                 return { unit: unit };
@@ -62,10 +65,11 @@ export class AxisForms extends React.PureComponent<PanelOptionsEditorProps<Axis>
           />
           <Label>Decimals</Label>
           <Input
+            css=""
             type="number"
             name="decimals"
             defaultValue={axis.decimals}
-            onChange={e => {
+            onChange={(e) => {
               const decimals = e.currentTarget.value;
               this.props.onChange({ ...this.props.value, decimals: Number(decimals) });
               this.setState(() => {

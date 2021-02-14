@@ -22,14 +22,12 @@ export class Curves extends React.PureComponent<CurvesProps> {
             <path
               fill={fill}
               stroke={stroke}
-              stroke-width={this.props['stroke-width']}
+              strokeWidth={this.props['stroke-width']}
               id={'curve-' + this.props.index * 100 + index}
-              ref={node => {
-                return d3
-                  .select(node)
-                  .datum(dataCurve)
-                  .attr('d', curveGenerator);
+              ref={(node) => {
+                return d3.select(node).datum(dataCurve).attr('d', curveGenerator);
               }}
+              key={'curve' + index.toString()}
             />
           );
         })}

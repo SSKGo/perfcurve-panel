@@ -31,10 +31,11 @@ class CurveItemForm extends React.PureComponent<CurveItemFormProps> {
       <HorizontalGroup>
         <Label>X</Label>
         <Input
+          css=""
           type="text"
           name="xField"
           defaultValue={value.xField}
-          onBlur={e => {
+          onBlur={(e) => {
             const xField = e.currentTarget.value;
             this.setState(() => {
               return { xField: xField };
@@ -44,10 +45,11 @@ class CurveItemForm extends React.PureComponent<CurveItemFormProps> {
         />
         <Label>Y</Label>
         <Input
+          css=""
           type="text"
           name="yField"
           defaultValue={value.yField}
-          onBlur={e => {
+          onBlur={(e) => {
             const yField = e.currentTarget.value;
             this.setState(() => {
               return { yField: yField };
@@ -132,7 +134,7 @@ class CurveGroupForm extends React.PureComponent<CurveGroupFormProps> {
             <Label>Color</Label>
             <ColorPicker
               color={value.color}
-              onChange={color => {
+              onChange={(color) => {
                 this.setState(() => {
                   return { color: color };
                 });

@@ -7,7 +7,7 @@ import { PlotSeriesForms } from './PlotSeriesForms';
 import { AxisForms } from './AxisForms';
 import { getColorFromHexRgbOrName } from '@grafana/data';
 
-export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setPanelOptions(builder => {
+export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setPanelOptions((builder) => {
   return builder
     .addCustomEditor({
       category: ['Axes'],

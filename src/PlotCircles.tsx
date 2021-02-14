@@ -1,23 +1,16 @@
 import React from 'react';
-import { Tooltip, GraphLegend, LegendDisplayMode, VerticalGroup } from '@grafana/ui';
+import { Tooltip, VizLegend, LegendDisplayMode, VerticalGroup, VizLegendItem } from '@grafana/ui';
 import { formattedValueToString, getValueFormat, dateTimeFormatISO } from '@grafana/data';
 import { Axis, TimeXYDatumProps } from './types';
-
-interface LegendProps {
-  color: string;
-  label: string;
-  isVisible: boolean;
-  yAxis: number;
-}
 
 interface PlotCirclesProps {
   data: TimeXYDatumProps[];
   radius: number;
   xAxis: Axis;
   yAxis: Axis;
-  xScale: (a: number) => number;
-  yScale: (a: number) => number;
-  legend: LegendProps;
+  xScale: d3.ScaleLinear<number, number>;
+  yScale: d3.ScaleLinear<number, number>;
+  legend: VizLegendItem;
   timeZone: string;
 }
 
@@ -26,25 +19,25 @@ export class PlotCircles extends React.PureComponent<PlotCirclesProps> {
     const { data, radius, xAxis, yAxis, xScale, yScale, legend, timeZone } = this.props;
     return (
       <g>
-        {data.map(datum => {
+        {data.map((datum) => {
           if (datum.timestamp !== null && datum.x !== null && datum.y !== null) {
             const timestamp = dateTimeFormatISO(datum.timestamp, { timeZone: timeZone })
               .replace('T', ' ')
               .replace('+', ' +');
-            const x = formattedValueToString(getValueFormat(xAxis.unit)(datum.x, xAxis.decimals));
-            const y = formattedValueToString(getValueFormat(yAxis.unit)(datum.y, yAxis.decimals));
+            const xFormarted = formattedValueToString(getValueFormat(xAxis.unit)(datum.x, xAxis.decimals));
+            const yFormarted = formattedValueToString(getValueFormat(yAxis.unit)(datum.y, yAxis.decimals));
             return (
               <Tooltip
                 content={() => {
                   return (
                     <VerticalGroup>
-                      <GraphLegend items={[legend]} placement="over" displayMode={LegendDisplayMode.List}></GraphLegend>
+                      <VizLegend items={[legend]} placement="bottom" displayMode={LegendDisplayMode.List} />
                       <div>Time: {timestamp}</div>
                       <div>
-                        {xAxis.label}: {x}
+                        {xAxis.label}: {xFormarted}
                       </div>
                       <div>
-                        {yAxis.label}: {y}
+                        {yAxis.label}: {yFormarted}
                       </div>
                     </VerticalGroup>
                   );
