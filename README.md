@@ -46,3 +46,236 @@ Table format is recommended as query option.
 
 ![Operation points](https://raw.githubusercontent.com/SSKGo/perfcurve-panel/master/docs/img/plot_setting.png 'Operation points')
 ![Query example](https://raw.githubusercontent.com/SSKGo/perfcurve-panel/master/docs/img/query_example.png 'Query example')
+
+### Sample with TestData DB
+
+Refer to the attached sample input with TestData DB. TestData DB is available as default, if you add TestaData DB to data source.
+
+![Sample of input with TestDB](https://raw.githubusercontent.com/SSKGo/perfcurve-panel/master/docs/img/test_db_sample_input.png 'Input sample with TestDB')
+![Sample of panel with TestDB](https://raw.githubusercontent.com/SSKGo/perfcurve-panel/master/docs/img/test_db_sample_panel.png 'Sample of panel with TestDB')
+
+Sample of Panel JSON:
+
+```
+{
+  "id": 23763571993,
+  "gridPos": {
+    "h": 9,
+    "w": 12,
+    "x": 0,
+    "y": 0
+  },
+  "type": "sskgo-perfcurve-panel",
+  "title": "Panel Title",
+  "pluginVersion": "7.5.6",
+  "targets": [
+    {
+      "alias": "Field X",
+      "csvWave": {
+        "timeStep": 60,
+        "valuesCSV": "0,0,2,2,1,1"
+      },
+      "lines": 10,
+      "points": [],
+      "pulseWave": {
+        "offCount": 3,
+        "offValue": 1,
+        "onCount": 3,
+        "onValue": 2,
+        "timeStep": 60
+      },
+      "refId": "A",
+      "scenarioId": "csv_metric_values",
+      "stream": {
+        "bands": 1,
+        "noise": 2.2,
+        "speed": 250,
+        "spread": 3.5,
+        "type": "signal"
+      },
+      "stringInput": "30"
+    },
+    {
+      "alias": "Field Y",
+      "csvWave": {
+        "timeStep": 60,
+        "valuesCSV": "0,0,2,2,1,1"
+      },
+      "hide": false,
+      "lines": 10,
+      "points": [],
+      "pulseWave": {
+        "offCount": 3,
+        "offValue": 1,
+        "onCount": 3,
+        "onValue": 2,
+        "timeStep": 60
+      },
+      "refId": "B",
+      "scenarioId": "csv_metric_values",
+      "stream": {
+        "bands": 1,
+        "noise": 2.2,
+        "speed": 250,
+        "spread": 3.5,
+        "type": "signal"
+      },
+      "stringInput": "50"
+    },
+    {
+      "scenarioId": "csv_metric_values",
+      "refId": "C",
+      "alias": "Curve X1",
+      "csvWave": {
+        "timeStep": 60,
+        "valuesCSV": "0,0,2,2,1,1"
+      },
+      "hide": false,
+      "lines": 10,
+      "points": [],
+      "pulseWave": {
+        "offCount": 3,
+        "offValue": 1,
+        "onCount": 3,
+        "onValue": 2,
+        "timeStep": 60
+      },
+      "stream": {
+        "bands": 1,
+        "noise": 2.2,
+        "speed": 250,
+        "spread": 3.5,
+        "type": "signal"
+      },
+      "stringInput": "10, 10"
+    },
+    {
+      "scenarioId": "csv_metric_values",
+      "refId": "D",
+      "alias": "Curve Y1",
+      "csvWave": {
+        "timeStep": 60,
+        "valuesCSV": "0,0,2,2,1,1"
+      },
+      "hide": false,
+      "lines": 10,
+      "points": [],
+      "pulseWave": {
+        "offCount": 3,
+        "offValue": 1,
+        "onCount": 3,
+        "onValue": 2,
+        "timeStep": 60
+      },
+      "stream": {
+        "bands": 1,
+        "noise": 2.2,
+        "speed": 250,
+        "spread": 3.5,
+        "type": "signal"
+      },
+      "stringInput": "70, 65"
+    },
+    {
+      "scenarioId": "csv_metric_values",
+      "refId": "E",
+      "alias": "Curve X2",
+      "csvWave": {
+        "timeStep": 60,
+        "valuesCSV": "0,0,2,2,1,1"
+      },
+      "hide": false,
+      "lines": 10,
+      "points": [],
+      "pulseWave": {
+        "offCount": 3,
+        "offValue": 1,
+        "onCount": 3,
+        "onValue": 2,
+        "timeStep": 60
+      },
+      "stream": {
+        "bands": 1,
+        "noise": 2.2,
+        "speed": 250,
+        "spread": 3.5,
+        "type": "signal"
+      },
+      "stringInput": "20, 20"
+    },
+    {
+      "scenarioId": "csv_metric_values",
+      "refId": "F",
+      "alias": "Curve Y2",
+      "csvWave": {
+        "timeStep": 60,
+        "valuesCSV": "0,0,2,2,1,1"
+      },
+      "hide": false,
+      "lines": 10,
+      "points": [],
+      "pulseWave": {
+        "offCount": 3,
+        "offValue": 1,
+        "onCount": 3,
+        "onValue": 2,
+        "timeStep": 60
+      },
+      "stream": {
+        "bands": 1,
+        "noise": 2.2,
+        "speed": 250,
+        "spread": 3.5,
+        "type": "signal"
+      },
+      "stringInput": "68,63"
+    }
+  ],
+  "options": {
+    "xAxis": {
+      "minValue": 0,
+      "maxValue": 60,
+      "label": "Flowrate"
+    },
+    "yAxis": {
+      "minValue": 0,
+      "maxValue": 100,
+      "label": "Pressure"
+    },
+    "performanceCurveData": [
+      {
+        "color": "rgba(136, 136, 136, 0.6)",
+        "performCurveX": "10,20,30,40,50",
+        "performCurveY": "80,78,72,62,48"
+      }
+    ],
+    "dynamicPerfCurve": [
+      {
+        "fieldGroup": [
+          {
+            "xField": "Curve X1",
+            "yField": "Curve Y1"
+          },
+          {
+            "xField": "Curve X2",
+            "yField": "Curve Y2"
+          }
+        ],
+        "color": "#FADE2A"
+      }
+    ],
+    "plotSetting": [
+      {
+        "color": "#F2495C",
+        "label": "Label Name",
+        "xField": "Field X",
+        "yField": "Field Y"
+      }
+    ],
+    "pointRadius": 4
+  },
+  "timeFrom": null,
+  "timeShift": null,
+  "datasource": null
+}
+```
