@@ -1,6 +1,5 @@
 import React from 'react';
 import { PanelOptionsEditorProps } from '@grafana/data';
-import { getColorFromHexRgbOrName } from '@grafana/data';
 import { Button, ColorPicker, Tooltip, Input, HorizontalGroup, Label, VerticalGroup } from '@grafana/ui';
 import { CurvePoints } from './types';
 
@@ -104,7 +103,7 @@ export class CurveLineForms extends React.PureComponent<PanelOptionsEditorProps<
               this.onAdd({
                 performCurveX: '',
                 performCurveY: '',
-                color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
+                color: 'rgba(136, 136, 136, 0.6)',
               } as CurvePoints);
             }}
           >

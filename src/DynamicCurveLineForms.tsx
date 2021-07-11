@@ -1,5 +1,4 @@
 import React from 'react';
-import { getColorFromHexRgbOrName } from '@grafana/data';
 import { PanelOptionsEditorProps } from '@grafana/data';
 import {
   Button,
@@ -185,7 +184,7 @@ export class DynamicCurveLineForms extends React.PureComponent<PanelOptionsEdito
           onClick={() => {
             this.onAddGroup({
               fieldGroup: [{ xField: '', yField: '' }],
-              color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
+              color: 'rgba(136, 136, 136, 0.6)',
             } as CurveGroup);
           }}
         >

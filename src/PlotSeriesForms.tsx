@@ -1,5 +1,4 @@
 import React from 'react';
-import { getColorFromHexRgbOrName } from '@grafana/data';
 import { PanelOptionsEditorProps } from '@grafana/data';
 import { Button, ColorPicker, HorizontalGroup, Input, Label, Tooltip, VerticalGroup } from '@grafana/ui';
 import { PlotSeries } from './types';
@@ -119,7 +118,7 @@ export class PlotSeriesForms extends React.PureComponent<PanelOptionsEditorProps
                 label: '',
                 xField: '',
                 yField: '',
-                color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
+                color: 'rgba(136, 136, 136, 0.6)',
               } as PlotSeries);
             }}
           >
