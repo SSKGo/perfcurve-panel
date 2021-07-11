@@ -1,5 +1,16 @@
 # Change Log
 
+## v1.5.0 - 2021-02-14
+
+### Fixed
+
+- Fix the bug which happens when the plugin is used in Grafana 8.x.
+
+### ADDED
+
+- Add version dependency information in README.
+- TestData DB sample in README.
+
 ## v1.4.0 - 2021-02-14
 
 ### Fixed
