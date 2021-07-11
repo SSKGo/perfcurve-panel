@@ -1,6 +1,5 @@
 import { MergedFieldsProps, TimeXYDatumProps } from './types';
-import { getFieldDisplayName } from '@grafana/data';
-import { FieldType, PanelData } from '@grafana/data';
+import { FieldType, PanelData, getFieldDisplayName } from '@grafana/data';
 
 export const mergeXYField = (fieldPlotX: MergedFieldsProps, fieldPlotY: MergedFieldsProps): TimeXYDatumProps[] => {
   // Create array from fields

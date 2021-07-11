@@ -1,10 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import * as d3 from 'd3';
-import { stylesFactory } from '@grafana/ui';
 import { VizLegend, LegendDisplayMode, VizLegendItem } from '@grafana/ui';
-import { getValueFormat } from '@grafana/data';
-import { PanelProps } from '@grafana/data';
+import { getValueFormat, PanelProps } from '@grafana/data';
 import { CanvasOptions, CurvePoints, MergedFieldsProps, TimeXYDatumProps } from './types';
 import { Curves } from './Curves';
 import { PlotCircles } from './PlotCircles';
@@ -296,7 +294,7 @@ export const PerformanceCurvePanel: React.FC<Props> = ({ options, data, width, h
   );
 };
 
-const getStyles = stylesFactory(() => {
+const getStyles = () => {
   return {
     wrapper: css`
       position: relative;
@@ -313,4 +311,4 @@ const getStyles = stylesFactory(() => {
       padding: 10px;
     `,
   };
-});
+};

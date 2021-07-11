@@ -5,7 +5,6 @@ import { CurveLineForms } from './CurveLineForms';
 import { DynamicCurveLineForms } from './DynamicCurveLineForms';
 import { PlotSeriesForms } from './PlotSeriesForms';
 import { AxisForms } from './AxisForms';
-import { getColorFromHexRgbOrName } from '@grafana/data';
 
 export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setPanelOptions((builder) => {
   return builder
@@ -47,7 +46,7 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
         {
           performCurveX: '10,20,30,40,50',
           performCurveY: '80,78,72,62,48',
-          color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
+          color: 'rgba(136, 136, 136, 0.6)',
         },
       ],
       editor: CurveLineForms,
@@ -73,7 +72,7 @@ export const plugin = new PanelPlugin<CanvasOptions>(PerformanceCurvePanel).setP
           label: 'Label Name',
           xField: 'Field X',
           yField: 'Field Y',
-          color: getColorFromHexRgbOrName('rgba(136, 136, 136, 0.6)'),
+          color: 'rgba(136, 136, 136, 0.6)',
         },
       ],
       editor: PlotSeriesForms,

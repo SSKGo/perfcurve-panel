@@ -19,7 +19,8 @@
     "@grafana/toolkit": "latest",
     "@grafana/ui": "latest",
     "@types/d3": "^5.7.2",
-    "emotion": "10.0.27"
+    "emotion": "10.0.27",
+    "tslib": "^2.3.0"
   },
   "engines": {
     "node": ">=14"
